@@ -4,7 +4,7 @@ const path = require('path');
 const swaggerDefinition = {
   openapi: '3.0.0',
   info: {
-    title: 'Minha API - CR Cursos Mobile (;', 
+    title: 'Minha API - CR Cursos Mobile', 
     version: '1.0.0',
     description: 'Documentação da API do projeto AppCR',
   },
@@ -14,6 +14,16 @@ const swaggerDefinition = {
       description: 'Servidor de Desenvolvimento',
     },
   ],
+  components: {
+    securitySchemes: {
+      bearerAuth: {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+        description: 'Insira o token JWT no formato `Bearer <token>`',
+      },
+    },
+  },
 };
 
 const options = {
