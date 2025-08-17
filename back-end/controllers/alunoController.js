@@ -49,7 +49,6 @@ const createAluno = async (req, res) => {
     return res.status(400).json({ message: 'Data de nascimento inválida. Use o formato DD/MM/AAAA.' });
   }
 
-  const idade = calcularIdade(data_nascimento);
 
   if (idade < 18 && (!nome_responsavel || !email_responsavel || !telefone_responsavel)) {
     return res.status(400).send('Responsável obrigatório para menores de idade');

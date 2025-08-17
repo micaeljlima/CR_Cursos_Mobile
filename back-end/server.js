@@ -1,6 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
+const swaggerUi = require('swagger-ui-express');
+const swaggerSpec = require('./swagger/swagger')
 require('dotenv').config();
 
 // Rota de imagem //
@@ -22,6 +24,7 @@ app.get('/', (req, res) => {
 });
 
 // Rotas da API
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use('/api/alunos', alunoRoutes);              // Alunos em: http://localhost:5000/api
 app.use('/api/professores', professorRoutes);  // Professores em: http://localhost:5000/professores / 
 app.use('/api', authRoutes);                 // Login (alunos/professore) em: http://localhost:5000/login
