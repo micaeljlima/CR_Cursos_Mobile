@@ -3,12 +3,10 @@ const validarEmail = require('../../utils/aluno/validarEmail');
 const { atualizarAluno } = require('../../services/alunoService');
 
 module.exports = async (id, novosDados) => {
-  // Validação de email
   if (novosDados.email && !validarEmail(novosDados.email)) {
     throw { status: 400, message: 'Email inválido' };
   }
 
-  // Validação de idade e dados do responsável
   if (novosDados.data_nascimento) {
     const idade = calcularIdade(novosDados.data_nascimento);
 

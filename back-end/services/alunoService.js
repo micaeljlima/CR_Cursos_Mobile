@@ -1,12 +1,10 @@
 const { db } = require('../config/firebase');
 
-// Verifica se email já existe
 async function emailExiste(email) {
   const snapshot = await db.ref('alunos').orderByChild('email').equalTo(email).once('value');
   return snapshot.exists();
 }
 
-// Cria aluno (dados já devem estar validados e tratados no use-case)
 async function criarAluno(id, dados) {
   await db.ref(`alunos/${id}`).set({
     ...dados,
@@ -15,21 +13,18 @@ async function criarAluno(id, dados) {
   return id;
 }
 
-// Lista todos os alunos
 async function getTodosAlunos() {
   const snapshot = await db.ref('alunos').once('value');
   const alunos = snapshot.val() || {};
   return Object.entries(alunos).map(([id, data]) => ({ id, ...data }));
 }
 
-// Busca aluno por ID
 async function getAlunoPorId(id) {
   const snapshot = await db.ref(`alunos/${id}`).once('value');
   if (!snapshot.exists()) return null;
   return snapshot.val();
 }
 
-// Atualiza aluno (dados já validados no use-case)
 async function atualizarAluno(id, novosDados) {
   const dadosExistentesSnap = await db.ref(`alunos/${id}`).once('value');
   if (!dadosExistentesSnap.exists()) return false;
@@ -42,7 +37,6 @@ async function atualizarAluno(id, novosDados) {
   return true;
 }
 
-// Deleta aluno
 async function deletarAluno(id) {
   const snapshot = await db.ref(`alunos/${id}`).once('value');
   if (!snapshot.exists()) return false;

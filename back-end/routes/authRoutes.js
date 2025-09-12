@@ -7,14 +7,14 @@ const authMiddleware = require('../middlewares/authMiddleware');
  * @swagger
  * tags:
  *   - name: Autenticação
- *     description: Rotas de login e logout
+ *     description: Rotas de login e logout (alunos, professores e administradores)
  */
 
 /**
  * @swagger
  * /auth/login:
  *   post:
- *     summary: Realiza o login de um usuário (aluno ou professor)
+ *     summary: Realiza o login de um usuário (aluno, professor ou admin)
  *     tags: [Autenticação]
  *     requestBody:
  *       required: true
@@ -43,20 +43,21 @@ const authMiddleware = require('../middlewares/authMiddleware');
  *               properties:
  *                 token:
  *                   type: string
- *                 user:
- *                   type: object
- *                   properties:
- *                     id:
- *                       type: string
- *                     email:
- *                       type: string
- *                     full_name:
- *                       type: string
- *                     tipo:
- *                       type: string
- *                       description: "aluno ou professor"
+ *                 tipo:
+ *                   type: string
+ *                   description: "aluno, professor ou admin"
+ *                 id:
+ *                   type: string
+ *                   description: ID do usuário (ou admin)
+ *                 nome:
+ *                   type: string
+ *                   description: Nome completo do usuário
+ *       201:
+ *         description: Admin criado e logado pela primeira vez (usando credenciais do .env).
  *       401:
- *         description: Credenciais inválidas ou usuário não encontrado.
+ *         description: Credenciais inválidas ou senha incorreta.
+ *       404:
+ *         description: Usuário não encontrado.
  *       500:
  *         description: Erro interno do servidor.
  */

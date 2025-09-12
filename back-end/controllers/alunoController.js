@@ -4,7 +4,6 @@ const getAlunoByIdUC = require('../use-cases/aluno/getAlunoById');
 const updateAlunoUC = require('../use-cases/aluno/updateAluno');
 const deleteAlunoUC = require('../use-cases/aluno/deleteAluno');
 
-// Criar novo Aluno
 const createAluno = async (req, res) => {
   try {
     const result = await createAlunoUC(req.body);
@@ -14,7 +13,6 @@ const createAluno = async (req, res) => {
   }
 };
 
-// Buscar todos os alunos
 const getAllAlunos = async (req, res) => {
   try {
     const alunos = await getAllAlunosUC();
@@ -24,7 +22,6 @@ const getAllAlunos = async (req, res) => {
   }
 };
 
-// Buscar aluno por ID
 const getAlunoById = async (req, res) => {
   try {
     const aluno = await getAlunoByIdUC(req.params.id);
@@ -34,7 +31,6 @@ const getAlunoById = async (req, res) => {
   }
 };
 
-// Atualizar aluno
 const updateAluno = async (req, res) => {
   try {
     const result = await updateAlunoUC(req.params.id, req.body);
@@ -44,7 +40,6 @@ const updateAluno = async (req, res) => {
   }
 };
 
-// Deletar aluno
 const deleteAluno = async (req, res) => {
   try {
     const result = await deleteAlunoUC(req.params.id);

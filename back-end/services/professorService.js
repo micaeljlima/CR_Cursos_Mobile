@@ -72,10 +72,7 @@ const deleteProfessorService = async (id) => {
   return true;
 };
 
-/**
- * Apenas utilidade para o use-case: buscar professor por email
- * (sem aplicar regra de duplicidade aqui).
- */
+
 const findProfessorByEmail = async (email) => {
   const snapshot = await db.ref('professores').orderByChild('email').equalTo(email).once('value');
   return snapshot.exists() ? snapshot.val() : null;
